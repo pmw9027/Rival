@@ -4,10 +4,14 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,21 +23,27 @@ public class BoardController {
     @Autowired
     private Gson gson;
 
-    @GetMapping(value = {"/board"})
-    public ResponseEntity<ArrayList<Map<String, Object>>> getBoards(
-            @RequestParam(name = "page") String page
-    ) {
-        ArrayList<Map<String, Object>> responseBody = new ArrayList<>();
+    @Autowired
+    private BoardService boardService;
 
-        return ResponseEntity.ok(responseBody);
+    @GetMapping(value = {"/board"})
+    public ResponseEntity<String> getBoards(
+            Pageable pageable
+    ) {
+
+        return ResponseEntity.ok("");
     }
     @GetMapping(value = {"/board/{id}"})
-    public ResponseEntity<Map<String, Object>> getBoard(
-            @PathVariable("id") String id
+    public ResponseEntity<Object> getBoard(
+            @PathVariable("id") Long id
     ) {
-        Map<String, Object> responseBody = new HashMap<>();
+        BoardBO boardBO = boardService.getBoard(id);
 
-        return ResponseEntity.ok(responseBody);
+        if (boardBO == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return ResponseEntity.ok(boardBO);
     }
 
     @PostMapping(value = {"/board"})
@@ -42,9 +52,9 @@ public class BoardController {
     ) {
 
         BoardBO boardBO = gson.fromJson(payload, BoardBO.class);
-        Map<String, Object> responseBody = new HashMap<>();
+        boardService.create(boardBO);
 
-        responseBody.put("t", boardBO.getContent());
+        Map<String, Object> responseBody = new HashMap<>();
 
         return ResponseEntity.ok(responseBody);
     }

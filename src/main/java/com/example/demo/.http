@@ -2,7 +2,11 @@ GET http://localhost:8899/board
 Content-Type: application/json
 
 ###
-GET http://localhost:8899/board/1
+GET http://localhost:8899/board?page=2
+Content-Type: application/json
+
+###
+GET http://localhost:8899/board/3
 Content-Type: application/json
 
 ###
