@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,17 @@ public class BoardService {
     public BoardBO getBoard(Long id) {
 
         return  boardRepository.findById(id).orElse(null);
+    }
+
+    public boolean deletePost(Long id) {
+
+        try {
+            boardRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException exception) {
+            return false;
+        }
+
+        return true;
     }
 
     public List<BoardBO> list() {
