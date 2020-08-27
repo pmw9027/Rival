@@ -16,15 +16,24 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.data:spring-data-commons'
-    implementation 'org.springframework.hateoas:spring-hateoas'
+    implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure'
+
+
+    implementation group: 'com.auth0', name: 'java-jwt', version: '3.1.0'
 
     implementation 'com.google.code.gson:gson'
+
+    compile group: 'org.springframework.security', name: 'spring-security-web', version: '5.3.4.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-core'
+    compile group: 'org.springframework.security', name: 'spring-security-config'
+
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+//    testImplementation 'org.springframework.security:spring-security-test'
 }
 
 test {

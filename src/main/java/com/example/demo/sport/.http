@@ -1,0 +1,28 @@
+GET http://localhost:8899/game
+
+###
+GET http://localhost:8899/game/me?page=2
+
+###
+GET http://localhost:8899/game/3
+
+###
+PUT http://localhost:8899/game/3
+Content-Type: application/json
+
+{
+  "title": "title",
+  "content": "content"
+}
+
+###
+POST http://localhost:8899/game
+Content-Type: application/json
+
+{
+  "title": "title",
+  "content": "content"
+}
+
+###
+DELETE http://localhost:8899/game/1
