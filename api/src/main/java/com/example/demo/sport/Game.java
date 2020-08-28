@@ -1,7 +1,6 @@
 package com.example.demo.sport;
 
 
-import com.example.demo.account.AccountBO;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -19,9 +18,6 @@ public class Game {
 
     @OneToOne()
     Sport sport;
-
-    @ManyToMany(mappedBy = "participants")
-    Set<AccountBO> participants = new HashSet<>();
 
 
     @CreatedDate
