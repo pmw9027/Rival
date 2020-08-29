@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Entity
-public abstract class Sport {
+public class Sport {
 
     @Id
     @GeneratedValue

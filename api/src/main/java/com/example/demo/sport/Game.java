@@ -16,9 +16,9 @@ public class Game {
     @GeneratedValue
     Long id;
 
-    @OneToOne()
-    Sport sport;
 
+    @Column(name = "game_at", nullable = false)
+    private LocalDateTime gameAt;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
